@@ -1,6 +1,6 @@
 from portal.serializers import UserSerializer
 from .permissions import IsStudent,IsTeacher
-from .serializers import StudentProfileSerializer, TeacherProfileSerializer
+from .serializers import StudentProfileSerializer, TeacherProfileSerializer, StudentAssignmentSerializer, TeacherAssignmentSerializer
 from .models import StudentProfile, TeacherProfile
 from rest_framework import status, generics
 from rest_framework.response import Response
@@ -8,7 +8,6 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from academics.models import Department
 
-# from academics.setializers import DepartmentSerializer
 
 
 class StudentProfileView(generics.RetrieveUpdateAPIView):
@@ -68,10 +67,12 @@ class TeacherProfileView(generics.RetrieveUpdateAPIView):
             'profile': profile_data
         })
 
-class DepartmentAssignmentUpdateAPIView(generics.RetrieveUpdateAPIView):
-    permission_classes = [IsAdminUser]
+class AssignTeacherView(generics.UpdateAPIView):
     queryset = TeacherProfile.objects.all()
-    serializer_class = TeacherProfileSerializer
-    lookup_field = 'pk'
-    def put(self, request, *args, **kwargs):
-        pass
+    serializer_class = TeacherAssignmentSerializer
+    permission_classes = [IsAdminUser]  # Only admin
+
+class AssignStudentView(generics.UpdateAPIView):
+    queryset = StudentProfile.objects.all()
+    serializer_class = StudentAssignmentSerializer
+    permission_classes = [IsAdminUser]

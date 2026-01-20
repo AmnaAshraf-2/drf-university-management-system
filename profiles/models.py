@@ -27,7 +27,7 @@ class TeacherProfile(models.Model):
     assigned_courses = models.ManyToManyField(Courses, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     profile_picture = models.ImageField(upload_to='profile_pics', null=True, blank=True)
-    date_of_joining = models.DateField(null=True, blank=True)
+    date_of_joining = models.DateTimeField(auto_now_add=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
