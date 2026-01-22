@@ -1,4 +1,4 @@
-from profiles.permissions import IsTeacher
+from profiles.permissions import IsTeacher, IsStudent
 from rest_framework import generics
 from .models import Assessment
 from .serializers import AssessmentSerializer
@@ -24,3 +24,13 @@ class TeacherAssessmentView(generics.ListCreateAPIView):
             raise PermissionDenied("You cannot mark assessment for this course")
 
         serializer.save()
+
+class StudentAssessmentView(generics.ListAPIView):
+    permission_classes = [IsStudent]
+    serializer_class = AssessmentSerializer
+
+    def get_queryset(self):
+        student = self.request.user.student_profile
+        return Assessment.objects.filter(
+            enrollment__student=student
+        )

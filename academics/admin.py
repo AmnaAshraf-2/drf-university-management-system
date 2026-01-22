@@ -4,7 +4,7 @@ from .models import Courses, Department
 
 @admin.register(Courses)
 class CoursesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'code', 'tittle', 'department')  # use fields that actually exist
+    list_display = ('id', 'code', 'tittle', 'department')
     search_fields = ('code', 'tittle')
 
 

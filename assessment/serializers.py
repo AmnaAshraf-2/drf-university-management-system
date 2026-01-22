@@ -7,4 +7,14 @@ class AssessmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Assessment
-        fields = ['id', 'enrollment', 'student_name', 'course_title', 'assessment_type', 'marks_obtained', 'max_marks', 'date', 'remarks']
+        fields = [
+            'id',
+            'enrollment',
+            'student_name',
+            'course_title',
+            'assessment_type',
+            'marks_obtained',
+            'max_marks',
+            'date',
+            'remarks'
+        ]

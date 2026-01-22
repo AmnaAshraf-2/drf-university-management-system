@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import TeacherProfile, StudentProfile
 from academics.models import Department, Courses
 
-# Inline to easily select multiple courses for TeacherProfile
+
 class TeacherCoursesInline(admin.TabularInline):
     model = TeacherProfile.assigned_courses.through
     extra = 1
